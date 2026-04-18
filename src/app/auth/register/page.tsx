@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { TrendingUp, Loader2, CheckCircle } from 'lucide-react'
+import { TrendingUp, Loader2, CheckCircle, Mail, AlertTriangle } from 'lucide-react'
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('')
@@ -47,15 +47,43 @@ export default function RegisterPage() {
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
-        <Card className="w-full max-w-md border-0 shadow-lg text-center">
-          <CardContent className="pt-8 pb-8 space-y-4">
+        <Card className="w-full max-w-md border-0 shadow-lg">
+          <CardContent className="pt-8 pb-8 space-y-5">
             <div className="flex justify-center">
-              <CheckCircle className="h-16 w-16 text-green-500" />
+              <div className="relative">
+                <div className="bg-green-100 rounded-full p-4">
+                  <Mail className="h-10 w-10 text-green-600" />
+                </div>
+                <div className="absolute -bottom-1 -right-1 bg-green-500 rounded-full p-1">
+                  <CheckCircle className="h-4 w-4 text-white" />
+                </div>
+              </div>
             </div>
-            <h2 className="text-2xl font-bold text-slate-800">Conta criada!</h2>
-            <p className="text-slate-500">
-              Verifique seu e-mail para confirmar o cadastro e depois faça login.
-            </p>
+
+            <div className="text-center space-y-2">
+              <h2 className="text-2xl font-bold text-slate-800">Verifique seu e-mail!</h2>
+              <p className="text-slate-500 text-sm">
+                Enviamos um link de confirmação para{' '}
+                <span className="font-medium text-slate-700">{email}</span>
+              </p>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 space-y-2">
+              <div className="flex items-center gap-2 text-amber-700 font-medium text-sm">
+                <AlertTriangle className="h-4 w-4 flex-shrink-0" />
+                Não encontrou o e-mail?
+              </div>
+              <ul className="text-amber-700 text-sm space-y-1 pl-6 list-disc">
+                <li>Verifique a pasta de <strong>Spam</strong> ou <strong>Lixo eletrônico</strong></li>
+                <li>O e-mail pode levar alguns minutos para chegar</li>
+                <li>O remetente é <strong>noreply@supabase.io</strong></li>
+              </ul>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 text-blue-700 text-sm text-center">
+              Após confirmar o e-mail, volte aqui para fazer login.
+            </div>
+
             <Link href="/auth/login">
               <Button className="w-full">Ir para o Login</Button>
             </Link>
